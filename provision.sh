@@ -153,7 +153,7 @@ dpkg -s libmysqlclient-dev &>/dev/null || {
 }
 
 
-cd /vagrant
+cd /vagrant/{{ project_name }}
 python3.6 -m venv venv
 source venv/bin/activate
 pip3 install -U setuptools pip

@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   end
 
   excludes = [".git/","venv/"]
-  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+  config.vm.synced_folder ".", "/vagrant/{{ project_name }}", type: "rsync",
     rsync__exclude: excludes, rsync_excludes: excludes
 
   config.vm.define "dev" do |dev|
