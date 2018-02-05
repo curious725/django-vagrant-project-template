@@ -7,6 +7,7 @@ DB_PASSWORD=$4
 TEST_DB_NAME=$5
 DJANGO_SETTINGS_MODULE=$6
 PROJECT_REQUIREMENTS=$7
+SERVER_NAME=$8
 
 # fix possible locale issues
 echo "# Locale settings
