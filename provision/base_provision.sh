@@ -159,3 +159,6 @@ python3.6 -m venv venv
 source venv/bin/activate
 pip3 install -U setuptools pip
 pip3 install -r $PROJECT_REQUIREMENTS
+
+cd /vagrant/{{ project_name }}/src
+python manage.py migrate --settings=$DJANGO_SETTINGS_MODULE
