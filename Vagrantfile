@@ -18,9 +18,9 @@ Vagrant.configure("2") do |config|
   test_db_name = config.jsonconfig.get "test_db_name"
 
 
-  def provisioning(config, shell_arguments)
+  def provisioning(config, provision_script_path, shell_arguments)
     config.vm.provision "shell", privileged: false,
-    path: "provision.sh", args: shell_arguments
+    path: provision_script_path, args: shell_arguments
   end
 
   excludes = [".git/","venv/"]
@@ -32,11 +32,12 @@ Vagrant.configure("2") do |config|
     dev.vm.hostname = "django-dev"
 
     dev.ssh.username = "vagrant"
+    provision_script_path = "provision/dev_provision.sh"
 
     django_settings_module = config.jsonconfig.get "dev_django_settings_module"
     project_requirements = config.jsonconfig.get "dev_project_requirements"
 
-    provisioning(dev, [db_root_password,db_name,db_user,db_password,
+    provisioning(dev, provision_script_path, [db_root_password,db_name,db_user,db_password,
       test_db_name,django_settings_module,project_requirements])
 
     dev.vm.network :forwarded_port, host: 8000, guest: 8000, host_ip: "127.0.0.1"
@@ -44,11 +45,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "prod" do |prod|
 
+    provision_script_path = "provision/prod_provision.sh"
+
     django_settings_module = config.jsonconfig.get "prod_django_settings_module"
     project_requirements = config.jsonconfig.get "prod_project_requirements"
     server_name = config.jsonconfig.get "server_name"
 
-    provisioning(prod, [db_root_password,db_name,db_user,db_password,
+
+    provisioning(prod, provision_script_path, [db_root_password,db_name,db_user,db_password,
       test_db_name,django_settings_module,project_requirements,server_name])
 
       prod.vm.provider :digital_ocean do |provider, override|
