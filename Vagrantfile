@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
 
     django_settings_module = config.jsonconfig.get "prod_django_settings_module"
     project_requirements = config.jsonconfig.get "prod_project_requirements"
+    server_name = config.jsonconfig.get "server_name"
 
     provisioning(prod, [db_root_password,db_name,db_user,db_password,
       test_db_name,django_settings_module,project_requirements,server_name])
