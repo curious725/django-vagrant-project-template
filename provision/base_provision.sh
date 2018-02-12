@@ -13,14 +13,19 @@ SERVER_NAME=$8
 sudo mkdir /var/log/setup
 
 # fix possible locale issues
-echo "# Locale settings
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8">>~/.bashrc
-source ~/.bashrc
+if [ ! -f /var/log/setup/locale ];
+then
+  echo "# Locale settings
+  export LANGUAGE=en_US.UTF-8
+  export LANG=en_US.UTF-8
+  export LC_ALL=en_US.UTF-8">>~/.bashrc
+  source ~/.bashrc
 
-sudo locale-gen en_US.UTF-8
-sudo dpkg-reconfigure --frontend=noninteractive locales
+  sudo locale-gen en_US.UTF-8
+  sudo dpkg-reconfigure --frontend=noninteractive locales
+
+  sudo touch /var/log/setup/locale
+fi
 
 # set DJANGO_SETTINGS_MODULE environment variable
 echo "export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE">>~/.bashrc
