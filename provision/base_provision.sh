@@ -27,10 +27,6 @@ then
   sudo touch /var/log/setup/locale
 fi
 
-# set DJANGO_SETTINGS_MODULE environment variable
-echo "export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE">>~/.bashrc
-source ~/.bashrc
-
 # # update PYTHONPATH
 echo "export PYTHONPATH=$PYTHONPATH:/vagrant">>~/.bashrc
 source ~/.bashrc
@@ -164,6 +160,13 @@ dpkg -s libmysqlclient-dev &>/dev/null || {
 
 cd /vagrant/{{ project_name }}
 python3.6 -m venv venv
+
+# set DJANGO_SETTINGS_MODULE only if it's not already set in activate
+grep -q -F 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE' \
+/vagrant/{{ project_name }}/venv/bin/activate || \
+echo 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE' >> \
+/vagrant/{{ project_name }}/venv/bin/activate
+
 source venv/bin/activate
 pip3 install -U setuptools pip
 pip3 install -r $PROJECT_REQUIREMENTS
