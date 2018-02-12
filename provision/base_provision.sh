@@ -28,7 +28,8 @@ then
 fi
 
 # # update PYTHONPATH
-echo "export PYTHONPATH=$PYTHONPATH:/vagrant">>~/.bashrc
+grep -q -F 'export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src' ~/.bashrc || \
+echo 'export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src' >> ~/.bashrc && \
 source ~/.bashrc
 
 # #Updating and instaling dependencies
