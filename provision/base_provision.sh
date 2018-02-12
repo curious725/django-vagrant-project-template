@@ -138,7 +138,7 @@ dpkg -s mysql-server-5.7 &>/dev/null || {
 }
 
 # Setup of database
-if [ ! -f /var/log/databasesetup ];
+if [ ! -f /var/log/setup/{{ project_name }}database ];
 then
   mysql -uroot -proot -e "
   USE mysql;
@@ -149,7 +149,7 @@ then
   FLUSH PRIVILEGES;
   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$DB_ROOT_PASSWORD';
   "
-  sudo touch /var/log/databasesetup
+  sudo touch /var/log/setup/{{ project_name }}database
 
 fi
 
