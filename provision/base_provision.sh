@@ -9,6 +9,9 @@ DJANGO_SETTINGS_MODULE=$6
 PROJECT_REQUIREMENTS=$7
 SERVER_NAME=$8
 
+
+sudo mkdir /var/log/setup
+
 # fix possible locale issues
 echo "# Locale settings
 export LANGUAGE=en_US.UTF-8
