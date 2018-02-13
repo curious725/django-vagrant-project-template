@@ -7,8 +7,3 @@ cd /vagrant/{{ project_name }}/provision
 grep -q -F 'alias cool="source /vagrant/{{ project_name }}/venv/bin/activate;cd /vagrant/{{ project_name }}/src"' ~/.bashrc || \
 echo 'alias cool="source /vagrant/{{ project_name }}/venv/bin/activate;cd /vagrant/{{ project_name }}/src"' >> ~/.bashrc && \
 source ~/.bashrc
-
-echo "hello from dev env"
-pwd
-
-echo $SERVER_NAME

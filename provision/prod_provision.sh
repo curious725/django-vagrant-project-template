@@ -3,9 +3,6 @@
 cd /vagrant/{{ project_name }}/provision
 . base_provision.sh
 
-echo "hello from prod env"
-echo $SERVER_NAME
-
 
 cd /vagrant/{{ project_name }}/src
 python manage.py collectstatic --settings=$DJANGO_SETTINGS_MODULE
