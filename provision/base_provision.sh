@@ -28,8 +28,8 @@ then
 fi
 
 # # update PYTHONPATH
-grep -q -F 'export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src' ~/.bashrc || \
-echo 'export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src' >> ~/.bashrc && \
+grep -q -F "export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src" ~/.bashrc || \
+echo "export PYTHONPATH=$PYTHONPATH:/vagrant/{{ project_name }}/src" >> ~/.bashrc && \
 source ~/.bashrc
 
 # #Updating and instaling dependencies
@@ -167,9 +167,9 @@ cd /vagrant/{{ project_name }}
 python3.6 -m venv venv
 
 # set DJANGO_SETTINGS_MODULE only if it's not already set in activate
-grep -q -F 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE' \
+grep -q -F "export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE" \
 /vagrant/{{ project_name }}/venv/bin/activate || \
-echo 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE' >> \
+echo "export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE" >> \
 /vagrant/{{ project_name }}/venv/bin/activate
 
 source venv/bin/activate
