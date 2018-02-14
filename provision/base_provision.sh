@@ -137,12 +137,16 @@ dpkg -s mysql-server-5.7 &>/dev/null || {
   sudo apt-get purge -y expect
 }
 
+sudo cp /vagrant/boards/config/overrides.my.cnf /etc/mysql/mysql.conf.d/overrides.my.cnf
+sudo service mysql restart
+
 # Setup of database
 if [ ! -f /var/log/setup/{{ project_name }}database ];
 then
   mysql -uroot -proot -e "
   USE mysql;
-  CREATE DATABASE $DB_NAME;
+  CREATE DATABASE $DB_NAME DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
   CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';
   GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';
   GRANT ALL PRIVILEGES ON $TEST_DB_NAME.* TO '$DB_USER'@'localhost';
